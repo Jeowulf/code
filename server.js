@@ -7,6 +7,7 @@ var http = require("http");
 var https = require("https");
 var router = require('./app/routes');
 var request = require('request');
+var port = process.env.PORT || 8080;
 
 app.use('/', router);
 app.use(express.static(path.join(__dirname)));
@@ -33,6 +34,6 @@ app.post('/favorites', function(req, res) {
   res.send(data);
 });
 
-app.listen(3000, function() {
-  console.log("Listening on port 3000");
+app.listen(port, function() {
+  console.log("Listening on port " + port);
 });
