@@ -4,7 +4,7 @@ window.onload = function() {
 }
 
 function searchMovies() {
-    // set up possible queries (we only use one here);
+    // set up possible queries (we only use one here: searchQuery);
     var
         baseURL = 'https://www.omdbapi.com/?',
         searchQuery = '&s=',
@@ -29,6 +29,7 @@ function searchMovies() {
 }
 
 function searchMovieDetails(imdbID) {
+    //search for specific film details by its imdbID
     var
         baseURL = 'https://www.omdbapi.com/?',
         imdbQuery = '&i=',
@@ -55,8 +56,8 @@ function searchMovieDetails(imdbID) {
 function createMovieTables(movieSearchResults) {
     // TODO implement multiple pages with endless scrolling do not clear results for second page
     clearSearchResults();  //if new search params
-
-    if (movieSearchResults.Search.length > 0) {
+    //dynamically create movie table by iterating through search results
+    if (movieSearchResults && movieSearchResults.Search && movieSearchResults.Search.length > 0) {
         var movieTable = document.getElementById('movieTable');
         movieSearchResults.Search.forEach(function(result, i) {
             var
@@ -64,21 +65,20 @@ function createMovieTables(movieSearchResults) {
                 image = row.insertCell(0),
                 title = row.insertCell(1),
                 year = row.insertCell(2),
-                seeDetails = row.insertCell(3),
-                favorite = row.insertCell(4);
+                seeDetails = row.insertCell(3);
 
             row.id = result.imdbID;
             row.addEventListener('click', function() {
                 open
             }, false);
-            seeDetails.innerHTML = "See details",
+            seeDetails.innerHTML = "<button>See details</button>",
             seeDetails.addEventListener('click', function() {
                 searchMovieDetails(result.imdbID);
             }, false);
-            favorite.innerHTML =  "Add to favorites";
-            favorite.addEventListener('click', function() {
-                favoriteMovie(result.imdbID);
-            }, false);
+            // favorite.innerHTML =  "Add to favorites";
+            // favorite.addEventListener('click', function() {
+            //     favoriteMovie(result.imdbID);
+            // }, false);
             image.innerHTML = "<img src=" + result.Poster + "alt='posterImage'/>";
             title.innerHTML = result.Title;
             year.innerHTML = result.Year;
@@ -87,6 +87,7 @@ function createMovieTables(movieSearchResults) {
 }
 
 function createDetailsTable(details) {
+    //take selected details and supply them to the modal
     var modal = document.getElementById('detailsModal');
     modal.style.display = 'initial';
     document.getElementById('actors').innerHTML = details.Actors;
@@ -95,12 +96,14 @@ function createDetailsTable(details) {
     document.getElementById('genre').innerHTML = details.Genre;
     document.getElementById('writer').innerHTML = details.Writer;
     document.getElementById('title').innerHTML = details.Title;
+    document.getElementById('favoriteButton').value = details.Title;
     document.getElementById('rated').innerHTML = details.Rated;
     document.getElementById('poster').innerHTML = "<img src=" + details.Poster + "alt='hello'/>";
     document.getElementById('plot').innerHTML = details.Plot;
 }
 
 function closeDetails() {
+    //reset modal values to nothing and close modal through styling
     var modal = document.getElementById('detailsModal');
     modal.style.display = 'none';
     document.getElementById('actors').innerHTML = null;
@@ -115,6 +118,7 @@ function closeDetails() {
 }
 
 function clearSearchResults() {
+    //remove the children that make up the search results
     var movieTable = document.getElementById('movieTable');
     while (movieTable.firstChild) {
         movieTable.removeChild(movieTable.firstChild);
@@ -122,19 +126,20 @@ function clearSearchResults() {
 }
 
 function favoriteMovie(id) {
-    var
-        url = '/favorites',
-        http = new XMLHttpRequest(),
-        favoriteToAdd = {
-            "Title": "shmitle"
-        };
-    http.open("POST", url, true);
-    http.setRequestHeader("Content-type", "application");
+    //TODO implement better favoriting
+    // var
+    //     url = '/favorites',
+    //     http = new XMLHttpRequest(),
+    //     favoriteToAdd = {
+    //         "Title": "shmitle"
+    //     };
+    // http.open("POST", url, true);
+    // http.setRequestHeader("Content-type", "application");
     // http.onreadystatechange = function() {
     //     if(http.readyState == 4 && http.status == 200) {
     //         var movieObject = JSON.parse(http.responseText);
     //         createDetailsTable(movieObject);
     //     }
     // }
-    http.send(favoriteToAdd);
+    // http.send(url + "?&title=kitty");
 }

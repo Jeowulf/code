@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="/public/css/styles.css">
+    <script src="https://use.fontawesome.com/1e76a85c30.js"></script>
 </head>
 <body>
-    <h1>Mrs. Movie</h1>
-    <p>Well hello dear!  Can Mrs. Movie help you find something?</p>
-    <form>
-        <div>
-            <div>Movie Search Phrase:
-                <input type="text" placeHolder="enter search criteria" id="searchBox">
+    <div class="searchBar">
+        <form>
+            <div>
+                <div class="row searchRow">
+                    <div class="flex">Movie Search Phrase:</div>
+                    <div class="flex">
+                        <input type="text" placeHolder="enter search criteria" id="searchBox">
+                    </div>
+                    <div class="flex2"><i class="fa fa-search" onclick="searchMovies()" aria-hidden="true"></i></div>
+                    <div class="flex2"><i class="fa fa-ban" onclick="clearSearchResults()" aria-hidden="true"></i><span class="favoritesLink"><a href="/favorites">See your favorites</a></span></div>
+                </div>
             </div>
-        </div>
-    </form>
-    <button onclick="searchMovies()">Search</button>
-    <button onclick="clearSearchResults()">Clear Search Results</button>
+        </form>
+    </div>
 
-    <button onclick="favoriteMovie('kitty')"></button>
     <div>
         <div>Search Results</div>
         <table id="movieTable"></table>
@@ -27,17 +30,28 @@
         <div class="row">
             <div id="poster"></div>
             <div class="details">
-                <div id="title"></div>
-                <div id="director"></div>
-                <div id="actors"></div>
-                <div id="writer"></div>
-                <div id="genre"></div>
-                <div id="rated"></div>
-                <div id="country"></div>
-                <div id="plot"></div>
+                <div class="details" id="title"></div>
+                <div class="details" id="director"></div>
+                <div class="details" id="actors"></div>
+                <div class="details" id="writer"></div>
+                <div class="row">
+                    <div class="details" id="genre"></div>
+                    <div class="details" id="rated"></div>
+                    <div class="details" id="country"></div>
+                </div>
+                <div class="details" id="plot"></div>
+                <div class="row">
+                    <div class="flex">
+                        <form action="/favorites" method="POST">
+                            <button id="favoriteButton" name="title">Favorite</button>
+                        </form>
+                    </div>
+                    <div class="flex">
+                        <button onclick="closeDetails()">Close Details</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <button onclick="closeDetails()">Close Details</button>
     </div>
 </body>
 <script src="/app/app.js"></script>
