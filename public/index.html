@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+    <h1>Mrs. Movie</h1>
+    <p>Well hello dear!  Can Mrs. Movie help you find something?</p>
+    <form>
+        <div>
+            <div>Movie Search Phrase:
+                <input type="text" placeHolder="enter search criteria" id="searchBox">
+            </div>
+        </div>
+    </form>
+    <button onclick="searchMovies()">Search</button>
+    <button onclick="clearSearchResults()">Clear Search Results</button>
+
+    <button onclick="favoriteMovie('kitty')"></button>
+    <div>
+        <div>Search Results</div>
+        <table id="movieTable"></table>
+    </div>
+    <div id="detailsModal">
+        <div class="row">
+            <div id="poster"></div>
+            <div class="details">
+                <div id="title"></div>
+                <div id="director"></div>
+                <div id="actors"></div>
+                <div id="writer"></div>
+                <div id="genre"></div>
+                <div id="rated"></div>
+                <div id="country"></div>
+                <div id="plot"></div>
+            </div>
+        </div>
+        <button onclick="closeDetails()">Close Details</button>
+    </div>
+</body>
+<script src="/app/app.js"></script>
+
+</html>
