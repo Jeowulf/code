@@ -6,7 +6,7 @@ window.onload = function() {
 function searchMovies() {
     // set up possible queries (we only use one here);
     var
-        baseURL = 'http://www.omdbapi.com/?',
+        baseURL = 'https://www.omdbapi.com/?',
         searchQuery = '&s=',
         plotQueryParam = '&plot=',
         plotSearchValue = 'short',
@@ -30,7 +30,7 @@ function searchMovies() {
 
 function searchMovieDetails(imdbID) {
     var
-        baseURL = 'http://www.omdbapi.com/?',
+        baseURL = 'https://www.omdbapi.com/?',
         imdbQuery = '&i=',
         plotQueryParam = '&plot=',
         plotSearchValue = 'short',
